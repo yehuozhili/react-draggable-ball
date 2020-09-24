@@ -4,12 +4,9 @@ import { useGetBall } from "./components";
 
 function App() {
 	const [state, setState] = useState({ x: 0, y: 0 });
-	const [render, isDrag, _setisDrag, position, _setPosition] = useGetBall(
-		setState,
-		{
-			ratioSpeed: { x: 0.5, y: 0.5 },
-		}
-	);
+	const [render, isDrag, , position] = useGetBall(setState, {
+		ratioSpeed: { x: 0.5, y: 0.5 },
+	});
 
 	return (
 		<div className="App">
