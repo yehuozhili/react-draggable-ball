@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Draggable, { DraggableEvent, DraggableData } from "react-draggable";
+import { useGetBall } from "./components";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [state, setState] = useState({ x: 0, y: 0 });
+	const [render, isDrag, _setisDrag, position, _setPosition] = useGetBall(
+		setState,
+		{
+			ratioSpeed: { x: 0.5, y: 0.5 },
+		}
+	);
+
+	return (
+		<div className="App">
+			<Draggable
+				position={state}
+				onStop={(e: DraggableEvent, data: DraggableData) => {
+					setState({ x: data.x, y: data.y });
+				}}
+			>
+				<div
+					style={{
+						width: "100px",
+						height: "100px",
+						backgroundColor: "red",
+					}}
+				></div>
+			</Draggable>
+
+			<div
+				style={{
+					width: "100px",
+					height: "100px",
+					backgroundColor: "blue",
+					position: "relative",
+					transform: `translate(${state.x}px,${state.y}px)`,
+				}}
+			></div>
+
+			<div>{isDrag}</div>
+			<div>
+				{state.x},{state.y}
+			</div>
+			<div>
+				{position.x},{position.y}
+			</div>
+			{render}
+		</div>
+	);
 }
 
 export default App;
