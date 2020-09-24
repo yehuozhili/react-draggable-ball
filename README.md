@@ -91,3 +91,7 @@ export function useGetBall(
 	React.Dispatch<React.SetStateAction<IPositionState>> //可以改变小球在壳里位置
 ];
 ```
+
+### gif
+
+<img src='https://github.com/yehuozhili/react-draggable-ball/blob/master/demo/demo.gif' />
